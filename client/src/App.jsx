@@ -1,17 +1,30 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
 
 import { ChannelListContainer, ChannelContainer, Auth } from './components';
 
+import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
+const cookies = new Cookies();
 const apiKey = 'rxfmpqj35v7b';
+const authToken = cookies.get("token");
 
 const client = StreamChat.getInstance(apiKey);
 
-const authToken = false;
+// Connects the user and allows us to get the messgaes 
+if(authToken) {
+    client.connectUser({
+        id: cookies.get('userId'),
+        name: cookies.get('username'),
+        fullName: cookies.get('fullName'),
+        image: cookies.get('avatarURL'),
+        hashedPassword: cookies.get('hashedPassword'),
+        phoneNumber: cookies.get('phoneNumber'),
+    }, authToken)
+}
 
 const App = () => {
     if(!authToken) return <Auth />
