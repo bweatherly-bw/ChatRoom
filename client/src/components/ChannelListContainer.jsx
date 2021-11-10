@@ -1,12 +1,12 @@
 import React from 'react';
 import { Channel, ChannelList, useChatContext } from 'stream-chat-react';
 import Cookies from 'universal-cookie';
-
 import { ChannelSearch, TeamChannelList, TeamChannelPreview } from './';
 import ChatIcon from '../assets/chat.png'
 import LogoutIcon from '../assets/logout.png'
+const cookies = new Cookies;
 
-const SideBar = () => (
+const SideBar = ({ logout }) => (
     <div className="channel-list__sidebar">
         <div className="channel-list__sidebar__icon1" >
             <div className="icon1__inner" >
@@ -15,7 +15,7 @@ const SideBar = () => (
 
         </div> 
         <div className="channel-list__sidebar__icon2" >
-            <div className="icon1__inner" >
+            <div className="icon1__inner" onClick={logout} >
                 <img src={LogoutIcon} alt="Logout" width="30" />
             </div>
 
@@ -29,10 +29,21 @@ const CompanyHeader = () => (
          </div>
 )
 
-const ChannelListContainer = () => {
+const ChannelListContainer = ({ isCreating, setIsCreating, setCreateType, setIsEditing, setToggleContainer }) => {
+    const logout = () => {
+        cookies.remove("token");
+        cookies.remove("userId")
+        cookies.remove('username');
+        cookies.remove('fullName');
+        cookies.remove('avatarURL');
+        cookies.remove('hashedPassword');
+        cookies.remove('phoneNumber');
+
+        window.location.reload();
+    }
     return (
         <>
-            < SideBar /> 
+            < SideBar logout={logout} /> 
             <div className="channel-list__list__wrapper" >
                 <CompanyHeader/>
                 <ChannelSearch />
@@ -43,6 +54,10 @@ const ChannelListContainer = () => {
                     <TeamChannelList 
                     {...listProps}
                     type="team"
+                    isCreating={isCreating}
+                    setIsCreating={setIsEditing}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
                     />
                 )}
                 Preview={(previewProps) => (
@@ -53,7 +68,6 @@ const ChannelListContainer = () => {
                 )}
             />
             </div>
-
             <ChannelList
                 filters={{}}
                 channelRenderFilterFn={() => {}}
@@ -61,6 +75,10 @@ const ChannelListContainer = () => {
                     <TeamChannelList 
                     {...listProps}
                     type="messaging"
+                    isCreating={isCreating}
+                    setIsCreating={setIsEditing}
+                    setCreateType={setCreateType}
+                    setIsEditing={setIsEditing}
                     />
                 )}
                 Preview={(previewProps) => (
