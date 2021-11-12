@@ -9,6 +9,7 @@ import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
 const cookies = new Cookies();
+
 const apiKey = 'rxfmpqj35v7b';
 const authToken = cookies.get("token");
 
@@ -26,17 +27,18 @@ if(authToken) {
     }, authToken)
 }
 
+
 const App = () => {
     const [createType, setCreateType] = useState('');
     const [isCreating, setIsCreating] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
 
     if(!authToken) return <Auth />
-    
+
     return (
         <div className="app__wrapper">
-            <Chat client={client} theme="team light" >
-                <ChannelListContainer
+            <Chat client={client} theme="team light">
+                <ChannelListContainer 
                     isCreating={isCreating}
                     setIsCreating={setIsCreating}
                     setCreateType={setCreateType}
@@ -50,9 +52,8 @@ const App = () => {
                     createType={createType}
                 />
             </Chat>
-
         </div>
     );
 }
 
-export default App; 
+export default App;
