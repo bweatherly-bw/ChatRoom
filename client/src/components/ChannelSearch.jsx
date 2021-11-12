@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useChatContext } from 'stream-chat-react';
 
-import { seatchIcon } from '../assets';
+import { SearchIcon, seatchIcon } from '../assets';
 
 const ChannelSearch = () => {
     const [query, setQuery] = useState('');
@@ -26,7 +26,7 @@ const ChannelSearch = () => {
     return (
         <div className="channel-search__container">
             <div className="channel-search__input__icon">
-                <seatchIcon />
+                <SearchIcon />
             </div>
             <input 
             className="channel-search__input__text"
