@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
-import { userList } from './';
+
+import { UserList } from './';
 import { CloseCreateChannel } from '../assets';
-import UserList from './UserList';
 
 const ChannelNameInput = ({ channelName = '', setChannelName }) => {
     const handleChange = (event) => {
         event.preventDefault();
+
         setChannelName(event.target.value);
     }
+
     return (
         <div className="channel-name-input__wrapper">
-            <p>Channel Name</p>
-            <input value={channelName} onChange={handleChange} placeHolder="channel-name" />
-            <p>Add New Members</p>
+            <p>Name</p>
+            <input value={channelName} onChange={handleChange} placeholder="channel-name" />
+            <p>Add Members</p>
         </div>
     )
 }
@@ -21,24 +23,27 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
 const EditChannel = ({ setIsEditing }) => {
     const { channel } = useChatContext();
     const [channelName, setChannelName] = useState(channel?.data?.name);
-    const [selectedUsers, setSelectedUsers] = useState([]);
+    const [selectedUsers, setSelectedUsers] = useState([])
 
     const updateChannel = async (event) => {
         event.preventDefault();
+
         const nameChanged = channelName !== (channel.data.name || channel.data.id);
 
-        if (nameChanged) {
-            await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` })
+        if(nameChanged) {
+            await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}`});
         }
+
         if(selectedUsers.length) {
             await channel.addMembers(selectedUsers);
         }
+
         setChannelName(null);
         setIsEditing(false);
         setSelectedUsers([]);
     }
-    
-    return ( 
+
+    return (
         <div className="edit-channel__container">
             <div className="edit-channel__header">
                 <p>Edit Channel</p>
@@ -53,4 +58,4 @@ const EditChannel = ({ setIsEditing }) => {
     )
 }
 
-export default EditChannel;
+export default EditChannel
