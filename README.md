@@ -2,6 +2,9 @@
 
 ## https://chatterboxreact.netlify.app/
 
+<img width="1736" alt="Chatterbox" src="https://user-images.githubusercontent.com/60557209/142142334-59f5aa65-9dfb-49e0-afb8-ba98366dc904.png">
+
+
 ## Chatterbox is the last chat application that you will need. 
 
 ### You are able to create new chat rooms and add as many users as you would like. You are able to have direct messaging. Each user is able to edit and delete their own messages, full emoji support, GIF supprt, direct video playback, are some of the amazing features of this chatting application. 
