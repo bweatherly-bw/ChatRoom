@@ -486,7 +486,7 @@ body {
 }
 
 ::placeholder {
-  color: rgba(0, 0, 0, 0.66);
+  color: rgb(0, 0, 0);
   white-space: nowrap;
   width: 150px;
 }
