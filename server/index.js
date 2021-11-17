@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 
 const authRoutes = require("./routes/auth.js");
+const favRoutes = require("./routes/favs.js");
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -13,8 +14,10 @@ app.use(express.json());
 app.use(express.urlencoded());
 
 app.get('/', (req, res) => {
-    res.send('Hello');
+    res.send('Hello Main, 5000');
 });
+
+app.use('/favs', favRoutes);
 
 app.use('/auth', authRoutes);
 

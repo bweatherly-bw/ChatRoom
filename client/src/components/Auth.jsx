@@ -28,6 +28,7 @@ const Auth = () => {
         const { username, password, phoneNumber, avatarURL } = form;
 
         const URL = 'https://chatter-box-react.herokuapp.com/auth';
+        // const URL = 'https://localhost:3000';
 
         const { data: { token, userId, hashedPassword, fullName } } = await axios.post(`${URL}/${isSignup ? 'signup' : 'login'}`, {
             username, password, fullName: form.fullName, phoneNumber, avatarURL,
